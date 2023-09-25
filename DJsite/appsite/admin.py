@@ -14,9 +14,9 @@ class ProductAdmin(admin.ModelAdmin):
 class LessonAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'link', 'secondsLesson']
     prepopulated_fields = {'slug': ('name',)}
-    list_filter = [ 'secondsLesson']
+    list_filter = ['secondsLesson']
     list_editable = ['secondsLesson']
 
 @admin.register(UserCustom)
 class UserCustomAdmin(admin.ModelAdmin):
-    list_display = ['name', 'lessonID', 'TimeWatch']
+    list_display = ['name', 'lessonID', 'TimeWatch', 'viewed']
