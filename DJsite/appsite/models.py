@@ -8,6 +8,8 @@ class Product(models.Model):
     author = models.ForeignKey(User, models.SET_NULL, blank=True, null=True)
     name = models.CharField(max_length=100, db_index=True)
     slug = models.CharField(max_length=100, unique=True, db_index=True)
+    #lessonsList = lessonsListGet()
+    lessonsList = models.ManyToManyField('Lesson')
 
     class Meta:
         ordering = ('name', )
@@ -18,9 +20,8 @@ class Product(models.Model):
         return self.name
     
 
-
 class Lesson(models.Model):
-    productSet1 = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
+    #productSet1 = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
 
     name = models.CharField(max_length=100, db_index=True)
     slug = models.CharField(max_length=100, unique=True)
@@ -48,13 +49,16 @@ class UserCustom(models.Model):
     #def nameLesson(self)->str:
     #    return str(self.lessonID.name)
 
-    g = 'lesson1'
-    TimeLesson = cur.execute(f'SELECT secondsLesson FROM appsite_lesson Where name = "{g}"').fetchone()[0]
+    #g = 'lesson1'
+    #g = 
+    #TimeLesson = cur.execute(f'SELECT secondsLesson FROM appsite_lesson Where name = "lesson1"').fetchone()[0]
+    TimeLesson = 22
     cur.close
-    TimeWatch = models.IntegerField()
+    TimeWatch = models.IntegerField(blank=True, null=True)
     @property
     def viewed(self):
-        return 'Просмотрено' if self.TimeWatch / self.TimeLesson > 0.8 else 'Не просмотрено'
+        if self.TimeWatch != None:
+            return 'Просмотрено' if self.TimeWatch / self.TimeLesson > 0.8 else 'Не просмотрено'
     
     class Meta:
         ordering = ('name', )
