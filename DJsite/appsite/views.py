@@ -5,8 +5,8 @@ from django.contrib.auth.models import User, Group
 from appsite.models import UserCustom, Lesson, Product
 from rest_framework import viewsets
 from rest_framework import permissions
-from appsite.serializers import UserSerializer, GroupSerializer, UserCustomLessonsSerializer
-
+from appsite.serializers import UserSerializer, GroupSerializer, UserCustomLessonsSerializer, LessonUserSerializer, LessonUser2Serializer
+from appuser.models import UserCustomPermission
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -31,4 +31,20 @@ class UserCustomLessonsViewSet(viewsets.ModelViewSet):
     """
     queryset = Product.objects.all()
     serializer_class = UserCustomLessonsSerializer
+    permission_classes = [permissions.IsAuthenticated] 
+
+class LessonUserSerializerViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = UserCustom.objects.all()
+    serializer_class = LessonUserSerializer
+    permission_classes = [permissions.IsAuthenticated] 
+
+class LessonUser2SerializerViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = UserCustomPermission.objects.all()
+    serializer_class = LessonUser2Serializer
     permission_classes = [permissions.IsAuthenticated] 

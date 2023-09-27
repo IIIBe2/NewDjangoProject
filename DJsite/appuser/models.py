@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-from appsite.models import Product
+from appsite.models import Product, Lesson
 
 class UserCustomPermission(models.Model):
 
     name =  models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     OpenProduct = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
+    LessonsProd = models.ForeignKey(Lesson, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         ordering = ('name', )

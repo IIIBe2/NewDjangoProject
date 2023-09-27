@@ -24,6 +24,8 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'usersC', views.UserCustomLessonsViewSet)
+router.register(r'usersK', views.LessonUserSerializerViewSet) #AIP #1
+router.register(r'usersK2', views.LessonUser2SerializerViewSet) #AIP #2
 
 
 urlpatterns = [

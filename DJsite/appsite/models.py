@@ -10,6 +10,15 @@ class Product(models.Model):
     slug = models.CharField(max_length=100, unique=True, db_index=True)
     #lessonsList = lessonsListGet()
     lessonsList = models.ManyToManyField('Lesson')
+    
+    @property
+    def productname(self):
+        return self.name
+    productname = productname
+    @property
+    def lessonsListnames(self):
+        return self.lessonsListnames
+    lessonsListnames = lessonsListnames
 
     class Meta:
         ordering = ('name', )
@@ -44,7 +53,14 @@ class UserCustom(models.Model):
     lessonID = models.ForeignKey(Lesson, on_delete=models.CASCADE, blank=True, null=True)
     db = sqlite3.connect('db.sqlite3')
     cur = db.cursor()
-    
+    @property
+    def nameuser(self):
+        return self.name
+    nameuser = nameuser
+    @property
+    def Lessonname(self):
+        return self.lessonID
+    Lessonname = Lessonname
     #@property
     #def nameLesson(self)->str:
     #    return str(self.lessonID.name)
@@ -59,7 +75,7 @@ class UserCustom(models.Model):
     def viewed(self):
         if self.TimeWatch != None:
             return 'Просмотрено' if self.TimeWatch / self.TimeLesson > 0.8 else 'Не просмотрено'
-    
+    viewed = viewed
     class Meta:
         ordering = ('name', )
         verbose_name = 'Юзер'
